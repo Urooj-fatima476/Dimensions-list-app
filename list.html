@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #taskInput, #lengthInput, #widthInput, #heightInput, #breadthInput {
+      padding: 10px;
+      margin: 5px;
+      width: 200px;
+    }
+
+    #taskList {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .taskItem {
+      display: flex;
+      justify-content: space-between;
+      background-color: #04cf58;
+      padding: 10px;
+      margin: 5px;
+    }
+
+    .deleteButton {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Add Dimensions here</h1>
+
+  <label for="taskInput">Task:</label>
+  <input type="text" id="taskInput" placeholder="Enter task">
+
+  <label for="lengthInput">Length:</label>
+  <input type="text" id="lengthInput" placeholder="Enter length">
+
+  <label for="widthInput">Width:</label>
+  <input type="text" id="widthInput" placeholder="Enter width">
+
+  <label for="heightInput">Height:</label>
+  <input type="text" id="heightInput" placeholder="Enter height">
+
+  <label for="breadthInput">Breadth:</label>
+  <input type="text" id="breadthInput" placeholder="Enter breadth">
+
+  <button onclick="addTask()">Add Task</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    function addTask() {
+      var taskInput = document.getElementById("taskInput");
+      var lengthInput = document.getElementById("lengthInput");
+      var widthInput = document.getElementById("widthInput");
+      var heightInput = document.getElementById("heightInput");
+      var breadthInput = document.getElementById("breadthInput");
+      var taskList = document.getElementById("taskList");
+
+      var task = taskInput.value;
+      var length = lengthInput.value;
+      var width = widthInput.value;
+      var height = heightInput.value;
+      var breadth = breadthInput.value;
+
+      if (task && length && width && height && breadth) {
+        var listItem = document.createElement("li");
+        listItem.className = "taskItem";
+        listItem.innerHTML = `
+          <span>${task} - Dimensions:   ${length}  length  , ${width}  width  ,  ${height}  height   and   ${breadth}  breadth  </span>
+          <span class="deleteButton" onclick="removeTask(this)">Delete</span>
+        `;
+
+        taskList.appendChild(listItem);
+
+        // Clear input fields
+        taskInput.value = "";
+        lengthInput.value = "";
+        widthInput.value = "";
+        heightInput.value = "";
+        breadthInput.value = "";
+      } else {
+        alert("All fields are required!");
+      }
+    }
+
+    function removeTask(element) {
+      var taskList = document.getElementById("taskList");
+      var listItem = element.parentNode;
+      taskList.removeChild(listItem);
+    }
+  </script>
+
+</body>
+</html>
